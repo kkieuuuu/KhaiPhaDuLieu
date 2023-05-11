@@ -1,0 +1,76 @@
+MÃ LỚP HỌC PHẦN: 2311112005904
+TÊN HỌC PHẦN: KHAI PHÁ DỮ LIỆU
+SINH VIÊN THỰC HIỆN: 2021010180 - Nguyễn Thị Kim Kiều
+		     2021010319 - Lâm Hồ Thiên Tống
+TÊN ĐỀ TÀI: SỬ DỤNG THUẬT TOÁN K-MEANS ĐỂ PHÂN TÍCH KHÁCH HÀNG DỰA TRÊN HÀNH VI MUA HÀNG TRÊN TIKTOKSHOP
+
+CÁCH BƯỚC THỰC HIỆN THUẬT TOÁN
+* Trên WEKA
+	Bước 1: Vào Weka => Exporer.
+	Bước 2: Tại tab Preprocess -> Openfile và chọn file cần khai phá (Ở đây chọn file ChiTieuTheoSoThich.csv) 
+	Bước 3: Chuyển sang tab Cluster - > Choose. Và chọn vào SimpleKMeans (để sử dụng thuật toàn Kmeans).
+	Bước 4: Nhấp chuột vào SimpleKMeans. Cửa sổ weka.gui.GenericObjectEditor hiện ra, tại đây các giá trị sẽ thay đổi các giá trị phân cụm. 
+		- distanceFunction: Hàm tính khoảng cách, chọn vào khoảng cách Euclideans.
+		- numClusters, nhập số cụm muốn gom, chọn 7 cụm.
+	Bước 5: Bấm Start để chạy thuật toán.
+	Bước 6: Để trực quan hóa dữ liệu, tại màn hình “Result List”. Chuột phải vào kết quả đã chạy và chọn “Visualize cluster assignments”.
+
+
+* Trên Knowledge Flow
+	Bước 1: Mở Weka => Knowledge Flow
+	Bước 2: Tại DataSources => CSVLoader => Thả vào màn hình.
+	Bước 3: Nạp dữ liệu, Chuột phải vào CSVLoader => Configure… => Tại File name => Browse => Chọn file ChiTieuTheoSoThich.csv.
+	Bước 4: Tại Evaluation => TrainingSetMaker => Thả vào màn hình.
+	Bước 5: Để truyền dữ liệu từ file csv => Chuột phải vào “CSVLoader” => dataSet => Nối đến TrainingSetMaker
+	Bước 6: Tại “Clusterers” => chọn vào “SimpleKMeans” (để sử dụng thuật toán Kmeans)
+	Bước 7: Tại “TrainingSetMaker” => Chuột phải vào => “trainingSet” => Nối đến "SimpleKMeans"
+	Bước 8: Tại Visualization => chọn TextViewer => Thả vào màn hình.
+	Bước 9: Cài đặt thông số cho thuật toán, chuột phải vào “SimpleKmeans”, và chọn “Configure”:
+		- distanceFunction: Hàm tính khoảng cách, chọn vào khoảng cách Euclideans.
+		- numClusters, nhập số cụm muốn gom, chọn 7 cụm.
+	Bước 10: SimpleKMeans => Chuột phải vào “Text” => dẫn đến “TextViewer”.
+	Bước 11: Chạy thuật toán => Xem có lỗi không?
+	Bước 12: Phải chuột vào TextViewer Xem kết quả chạy => Show results để xem kết quả chạy của thuật toán.
+
+
+
+* Trên R
+	Bước 1: Cài thư viện “stats”, “dplyr”, “ggplot2”, “ggfortify” trên R.
+		Dùng lệnh sau:
+			install.packages("stats")
+			install.packages("dplyr")
+			install.packages("ggplot2")
+			install.packages("ggfortify")
+
+	Bước 2: Gọi các thư viện trên.
+		Dùng lệnh sau:
+			library(stats)
+			library(dplyr)
+			library(ggplot2)
+			library(ggfortify)
+
+	Bước 3: Đọc tệp dữ liệu ThoiQuenMuaSam.csv bằng hàm read.csv và lưu vào biến data.(Chỉnh lại đường dẫn đến tập tin)
+	Bước 4: Viết hàm wssplot để vẽ biểu thị biểu diễn sự thay đổi của tổng bình phương khoảng cách từ các điểm đến tâm cụm, tương ứng với số lượng cụm khác nhau của thuật toán K-means. 
+	Bước 5: Gọi hàm “wssplot” vừa tạo ở trên để vẽ biểu đồ, và dữ liệu là từ biến “data”.
+	Bước 6: Chạy thuật toán K-Means trên data với số lượng cụm là 4 và lưu vào biến KM.
+	Bước 7: Sử dụng hàm autoplot của ggfortify để vẽ biểu đồ scatter plot của dữ liệu mydata theo cụm đã được phân chia bởi thuật toán K-means
+	Bước 8: Chạy lệnh để trả về vị trí tâm cụm:
+			KM$centers
+
+* Trên Python
+	Bước 1: Mở Python lên.
+	Bước 2: Import thư viện “Pandas” vào trong Python.
+	Bước 3: Đọc file “MucDoMuaSam.csv” bằng hàm read_csv của thư viện “Pandas” để đọc file csv. (Chỉnh lại đường dẫn đến đúng tập tin)
+	Bước 4: Import các thư viện “sklearn”, “numpy”, “matplotlib”.  
+	Bước 5: Khởi tạo một đối tượng KMeans với 5 cụm, thực hiện 20 lần khởi tạo cụm khác nhau, và thiết lập seed cho quá trình ngẫu nhiên.
+	Bước 6: Thực hiện phân cụm dữ liệu trên các đặc trưng “Tần suất mua hàng”, “Số lượng sản phẩm” và “Giá trị đơn hàng”. 
+		Và gán nhãn cụm cho mỗi mẫu trong DataFrame “df”. Nhãn cụm được gán vào cột "cluster" của DataFrame.
+	Bước 7: In ra các tọa độ của các tâm cụm được tìm thấy bởi thuật toán Kmeans. Lệnh: print(kmeans.cluster_centers_)
+	Bước 8: Để thực hiện trực quan hóa dữ liệu, đầu tiên cần tạo 5 màu và gán màu sắc tương ứng cho từng cụm
+	Bước 9: Tiếp theo, sử dụng thư viện “matplotlib” để tạo ra một hình ảnh và thêm một trục 3D vào vị trí thứ nhất trong lưới của hình ảnh đó để hiển thị dữ liệu 3 chiều.
+	Bước 10: Truyền dữ liệu vào hình ảnh 3D và thiết lập các trục tương ứng với các thuộc tính của dữ liệu
+	Bước 11: Hiển thị hình ảnh đã được vẽ trên màn hình: plt.show()
+
+
+	
+	
